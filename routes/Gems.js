@@ -1,17 +1,25 @@
 const router = require('express').Router()
 
-let GemsController = require('../controllers/Gems')
+const GemsController = require('../Controllers/Gems')
 const VerifyToken = require('../middleware/VerifyToken')
 const multipart = require('connect-multiparty')
-router.get('/getGems',VerifyToken ,GemsController.getGems)
 
-router.post('/getGems',VerifyToken ,GemsController.getGems)
+router.get('/getgems', VerifyToken, GemsController.getGems)
 
-router.post('/addGem',VerifyToken ,GemsController.createGem)
+router.post('/getgems' , VerifyToken, GemsController.getGems)
 
-router.post('/getGem',VerifyToken ,GemsController.getGem)
+router.post('/addGem', GemsController.createGem)
 
-router.post('/UpdateGem',VerifyToken ,GemsController.updateGem)
+router.post('/getGem', VerifyToken, GemsController.getGem)
 
-router.post('/deleteGem',VerifyToken ,GemsController.deleteGem)
+router.post('/updategem', VerifyToken, GemsController.updateGem)
+
+router.post('/deletegem', VerifyToken, GemsController.deleteGem)
+
+router.use(multipart({
+    uploadDir: 'tmp'
+}))
+
+router.post('/uploadPhoto', GemsController.uploadPhotos)
+
 module.exports = router

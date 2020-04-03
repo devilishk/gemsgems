@@ -1,10 +1,14 @@
 let router = require('express').Router()
 
-let AuthController = require('../controllers/Auth')
+const AuthController = require('../Controllers/Auth')
+const VerifyToken = require('../Middleware/VerifyToken')
 
 router.post('/login', AuthController.loginUser)
-router.post('/logoout', AuthController.logoutUser)
-router.get('/me', AuthController.getCurrentUser)
+router.post('/logout', AuthController.logoutUser)
+router.post('/me', AuthController.getCurrentUser)
 router.post('/signup', AuthController.signInUser)
+
+
+
 
 module.exports = router

@@ -1,18 +1,17 @@
 {
-  "name": "node-api",
+  "name": "gems",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env JWT_SECRET=estaeslaclaveprivadaautilizar nodemon index.js"
+    "start": "cross-env JWT_SECRET=estaeslaclavedeauthentication nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.614.0",
-    "bcrypt": "^3.0.8",
+    "aws-sdk": "^2.648.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.20.0",
@@ -21,11 +20,11 @@
     "jsonwebtoken": "^8.5.1",
     "meteor-mongo-id": "^1.3.0",
     "meteor-random": "0.0.3",
-    "mongoose": "^5.8.11",
+    "mongoose": "^5.9.6",
     "sha256": "^0.2.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.1",
+    "cross-env": "^7.0.2",
     "nodemon": "^2.0.2"
   }
 }
