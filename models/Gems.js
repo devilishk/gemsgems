@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const meteorID = require('meteor-mongo-id')
 const Random = require('meteor-random')
 
-const ReviewSchema = Schema({
+const ReviewSchema = Schema({//Esto es un arreglo que tiene 4 propiedades, pertenece al esquema de gema
     stars: {
         type: Number,
         allowedValues:[5,4,3,2,1]
@@ -19,7 +19,7 @@ const ReviewSchema = Schema({
     }
 })
 
-const SpecsSchema = Schema ({
+const SpecsSchema = Schema ({//esquema de la caracteristica de la gema
     faces: { type: Number },
     color: { type: String },
     
@@ -33,7 +33,7 @@ const SpecsSchema = Schema ({
     allowedValues : [1,2,3,4,5,6,7,8,9,10] }
 })
 
-const GemsSchema = Schema({
+const GemsSchema = Schema({//aqui nos dice como debera ser insertada la gema en la base de datos a traves del PostMan esta hace uso de los esquemas anteriores
 
     _id:{
         type:String

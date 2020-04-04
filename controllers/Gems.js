@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = { //es la variable que sube los modulos para exportarlos
     getGems,
     getGemsPagination,
     getGem,
@@ -9,19 +9,21 @@ module.exports = {
     updateGemWithImages,
 }
 
-const GemsSub = require('../Models/Gems')
+const GemsSub = require('../Models/Gems')     //aqui estan las constantes con sus rutas
 const mongoose = require('mongoose')
 const meteorID = require('meteor-mongo-id')
 const Random = require('meteor-random')
 const cloudinary = require('cloudinary').v2
 const fs = require('fs')
 
-cloudinary.config({
-   
+cloudinary.config({ //aqui tenemos las credenciales del cloudinary para poder subir imagenes
+    cloud_name:'dpiwqviot',
+    api_key:'981823885591179',
+    api_secret:'AKYWsz5Ky3AR-BcTHHAn1dAn2Rg'
 
 })
 
-function getGems(req, res) {
+function getGems(req, res) { //funcion que trae a el objeto para su ejecucion y permite la busqueda de una gema que haya sido agregada recientemente
     GemsSub.find({}, (err, concepts) => {
         if (err) return res.status(500).send({ message: `Problem with the searching request ${err}` })
         if (!concepts) return res.status(404).send({ message: `Gems does not exist` })
@@ -29,7 +31,7 @@ function getGems(req, res) {
     })
 }
 
-function getGemsPagination(req, res) {
+function getGemsPagination(req, res) { //esta parte del codigo es para que cuando se hacen llamadas no sean dificiles de manejar
     let perPage = parseInt(req.body.perPage)
     let page = parseInt(req.body.page)
     let gemsConceptsRes = null;
@@ -67,25 +69,25 @@ function getGem(req, res) {
 
 }
 
-function createGem(req, res) {
+function createGem(req, res) { //aqui se crea la gema con los parametros
     let gem = req.body
     let g = {
 
         _id: Random.id(),
 
-        name: gem.name,
+        name: gem.name, //aqui agregamos descripcion, precio, nombre y si esta a la venta 
         description: gem.description,
         price: gem.price,
         canPurchase: gem.canPurchase,
 
-        specs: {
+        specs: { //aqui agregamos aristas de la gema, color, rareza y brillo
             faces: gem.specs.faces,
             color: gem.specs.color,
             rarity: gem.specs.rarity,
             shine: gem.specs.shine
         },
 
-        reviews: [{
+        reviews: [{ //esta parte es para los reviews de las gemas, donde se agregan estrellas, la fecha, el cuerpo del mensaje y el autor
             stars: gem.reviews.stars,
             body: gem.reviews.body,
             author: gem.reviews.author,
@@ -103,7 +105,7 @@ function createGem(req, res) {
     })
 }
 
-function updateGem(req, res) {
+function updateGem(req, res) { //aqui se actualizan las gemeas utlizando el id y el request del body
     let conceptID = req.body._id
     let update = req.body.gem
 
@@ -120,7 +122,7 @@ function updateGem(req, res) {
 
 }
 
-function updateGemWithImages(_id, img) {
+function updateGemWithImages(_id, img) { //actualizar la gema con la propiedad de tener una imagen
     let conceptID = _id
     let update = img
 
@@ -135,7 +137,7 @@ function updateGemWithImages(_id, img) {
 
 }
 
-function deleteGem(req, res) {
+function deleteGem(req, res) { //funcion para borrar la gema 
     const conceptID = req.body._id
 
 
@@ -146,7 +148,7 @@ function deleteGem(req, res) {
 
 }
 
-function uploadPhotos(req, res) {
+function uploadPhotos(req, res) { //funcion que nos permite subir foto a traves de cloudinary
 
     const path = req.files.file.path
     console.log(path)
@@ -173,7 +175,7 @@ function uploadPhotos(req, res) {
 
 }
 
-function formatDateName(now) {
+function formatDateName(now) { //funcion para que exista una hora visible 
     let year = now.getFullYear()
     let month = now.getMonth() < 9 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
     let day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()
